@@ -1,0 +1,16 @@
+{
+  "name": "banco_imagenes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "node-fetch": "^3.2.3",
+    "unsplash-js": "^7.0.15"
+  }
+}

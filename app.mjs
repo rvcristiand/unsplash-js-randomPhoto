@@ -9,7 +9,8 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const accessKey = "G5-jFtX59X7U7epZu2mPrKblFXdw0hTLGbnkzG8EaiM"; // LdO6CwoeEzn4Ms3qhRLjk5LaiSPC3xdNYeZV1lfnAVE
+// no se publican llaves públicas en repositorios públicos
+// todo guardar las llaves en otro archivo y leerles desde allá
 
 const api = createApi( {
     accessKey: accessKey,
@@ -81,7 +82,13 @@ const getRandomPhoto = ( subject, no_images ) => {
     const folderpath = path.join( __dirname, 'images', subject );
 
     fs.exists( folderpath, exists => {
-    	if ( !exists ) fs.mkdirSync( folderpath );
+    	if ( !exists ) {
+	    try {
+		fs.mkdirSync( folderpath );
+	    } catch ( error ) {
+		// pass
+	    }
+	}
     } );
 
     // download photos
@@ -92,6 +99,7 @@ const getRandomPhoto = ( subject, no_images ) => {
         // username: 'naoufal',
         query: subject,
         count: no_images,
+	// lang: 'es',
     } ).then( ( res, rej ) => {
     	res[ 'response' ].forEach( resp => {
 	    // save photo info
@@ -114,94 +122,15 @@ const getRandomPhoto = ( subject, no_images ) => {
     } );
 }
 
-getRandomPhoto( 'data science', 9 );
+const filepath = path.join( __dirname, 'labels.json' );
 
+const labels = JSON.parse( fs.readFileSync( filepath, 'utf8' ) );
 
+// for ( let i = 0; i < labels[ 'labels'].length; i++ ) {
+//     // console.log( labels[ 'labels' ][ i ] );
+//     getRandomPhoto( labels[ 'labels' ][ i ], 1 );
+//     // break;
+// }
 
+getRandomPhoto( 'key data', 10 );
 
-// // const axios = require('axios');
-// // declare global {
-// //     var fetch: typeof nodeFetch.default;
-// //     type RequestInit = nodeFetch.RequestInit;
-// //     type Response = nodeFetch.Response;
-// // }
-// // global.fetch = nodeFetch.default;
-
-
-// // const http = require('http');
-
-// // const hostname = '127.0.0.1';
-// // const port = 3000;
-
-// // const server = http.createServer((req, res) => {
-// //     res.statusCode = 200;
-// //     res.setHeader('Content-Type', 'text/plain');
-// //     res.end('hola mundo');
-// // });
-
-// api.photos.get( { photoId: 'mtNweauBsMQ' } )
-//     .then( ( resp, reject ) => {
-// 	return resp[ 'response' ];
-//     } ).then( response => {
-// 	return response[ 'links' ];
-//     } ).then( links => {
-// 	return links[ 'download_location' ];
-//     } ).then( link => {//	const a = .then( ) console.log(  );
-// 	getUrl( link, 'downloads' ).then( (res, rej) => {
-// 	    const w = res[0];
-// 	    const filepath = res[1];
-
-// 	    w.on( 'finish',  () => {
-// 		const url = JSON.parse( fs.readFileSync( filepath, 'utf8' ) )[ 'url' ];
-// 		downloadFromUrl(url, 'downloads' );
-// 	    } );	
-	    
-
-// 	} ); 
-	
-// 	// a.then( ( resp ) => {
-// 	//     console.log( resp );
-// 	// } );
-// 	// a.then( ( resp ) => console.log( resp.data ) )
-// 	// console.log( a );
-// 	// a.on( 'finish', () => {
-	    
-// 	} );
-// 	// console.log( a );
-// 	// } );
-
-
-// 	// then( ( resp ) => {
-// 	//     console.log( resp );
-// 	// } );
-// 	// console.log( url );
-// 	// console.log( filepath );
-// 	// const filename = path.basename( link );
-// 	// const filepath = path.resolve( __dirname, 'downloads', filename );
-	
-// 	// axios.get( link, {
-// 	//     headers: {
-// 	// 	Authorization: "Client-ID LdO6CwoeEzn4Ms3qhRLjk5LaiSPC3xdNYeZV1lfnAVE",
-// 	// 	responseType: 'stream'
-// 	//     }
-// 	// } )
-// 	//     .then( ( response ) => {
-// 	// 	// console.log( 'holi' );
-// 	// 	const w = response.data.pipe( fs.createWriteStream( filepath ) );
-// 	//     } );
-// // } );
-
-
-
-// // api.search.getCollections({ query: 'cat', page: 1, perPage: 10 })
-// //     .then( (resolve, reject) => {
-// // 	return resolve[ 'response' ];
-// //     } ).then( (resolve, reject ) => {
-// // 	resolve[ 'results' ].forEach( image => {
-// // 	    console.log( image[ 'links' ][ 'self' ] );
-// // 	} );
-// //     } );
-
-// // server.listen(port, hostname, () => {
-// //     console.log(`El servidor se está ejecutando en http://${hostname}:${port}/`);
-// // })

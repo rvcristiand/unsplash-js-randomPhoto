@@ -1,0 +1,8 @@
+api/*
+images/*
+accesskey.txt
+app.js
+labels.json
+node_modules/
+package-lock.json
+notas.org

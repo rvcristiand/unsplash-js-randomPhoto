@@ -9,7 +9,7 @@ more than 1 billion+ calls per month, and a 99.998% uptime in the last 30 days (
 
 La API cuenta con la función [photos.getRandom()](https://github.com/unsplash/unsplash-js#photosgetrandomarguments-additionalfetchoptions), para descargar imagénes al azar. Dicha función recibe varios parámetros de entrada, entre los que se encuentran `query` y `count`. El parámetro`query` es una cadena de texto usada para consultar por fotos relacionadas, mientras que el parámetro `count` es un número entero que definir la cantidad de fotos a descargar. `count` no puede ser mayor a 30.
 
-Esta función se ha usado para crear el programa `app.mjs`. Dicho programa defina la función `getRandomPhoto()` para descargar imagénes en el computador. Esta función recibe dos parámetros de entrada, `subject` y `no_images`. Los parámetros `subject` y `no_images` sirven para consultar fotos a la API de Unsplash. Las imágenes descargaas se almacenan en una carpeta con el nombre de consulta dentro de la carpeta `./images`.
+Esta función se ha usado para crear el programa `app.mjs`. Dicho programa defina la función `getRandomPhoto()` para descargar imagénes en el computador. Esta función recibe dos parámetros de entrada, `subject` y `no_images`. Los parámetros `subject` y `no_images` sirven para consultar fotos a la API de Unsplash. Las imágenes descargadas se almacenan en una carpeta con el nombre de consulta dentro de la carpeta `./images`.
 
 ## Getting Started
 
